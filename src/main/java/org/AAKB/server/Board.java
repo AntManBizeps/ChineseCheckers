@@ -6,6 +6,7 @@ import java.util.Arrays;
 public class Board {
     private static final int SIZE = 121; // Example size for Chinese Checkers
     private char[] board;
+    private boolean gameStarted = false;
 
     public Board() {
         board = new char[SIZE];
@@ -26,5 +27,13 @@ public class Board {
 
     public void applyMove(String start, String end) {
         // Update board state based on the move
+    }
+
+    public boolean isGameStarted() {
+        return gameStarted;
+    }
+
+    public void startGame() {
+        this.gameStarted = true;
     }
 }

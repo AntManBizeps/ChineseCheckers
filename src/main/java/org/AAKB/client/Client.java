@@ -4,50 +4,44 @@ import java.io.*;
 import java.net.*;
 import java.util.Scanner;
 
+import org.AAKB.server.Message;
+
 import static org.AAKB.constants.ConstantProperties.*;
 
 public class Client {
     public static void main(String[] args) {
         try (Socket socket = new Socket(SERVER_ADDRESS, SERVER_PORT);
-             BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-             PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
+             ObjectOutputStream out = new ObjectOutputStream(socket.getOutputStream());
+             ObjectInputStream in = new ObjectInputStream(socket.getInputStream());
              Scanner scanner = new Scanner(System.in)) {
 
-            System.out.println("Connected to the server");
+            System.out.println("Enter your name:");
+            String name = scanner.nextLine();
+            out.writeObject(new Message("join", name));
 
             while (true) {
-                // Odbierz wiadomość od serwera
-                String serverMessage = in.readLine();
-                if (serverMessage == null) {
-                    System.out.println("Connection closed by server.");
+                Message serverMessage = (Message) in.readObject();
+                if ("gameStarted".equals(serverMessage.getType())) {
+                    System.out.println("Game has started!");
+                } else if ("move".equals(serverMessage.getType())) {
+                    System.out.println("Move received: " + serverMessage.getContent());
+                }
+
+                if (serverMessage == null || gameIsOver(serverMessage)) {
                     break;
                 }
 
-                System.out.println(serverMessage);
-
-                // Jeśli to kolej gracza, pozwól mu wpisać ruch
-                if (serverMessage.startsWith("Your turn")) {
-                    System.out.print("Enter your move or type EXIT to quit: ");
-                    String move = scanner.nextLine();
-
-                    if ("EXIT".equalsIgnoreCase(move.trim())) {
-                        out.println("EXIT");
-                        System.out.println("Exiting game...");
-                        break;
-                    }
-
-                    out.println(move);
-                }
-
-                // Obsługa końca gry
-                if (serverMessage.equalsIgnoreCase("Game over")) {
-                    System.out.println("The game has ended.");
-                    break;
-                }
+                System.out.println("Your turn! Enter your move:");
+                String move = scanner.nextLine();
+                out.writeObject(new Message("move", move));
             }
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    private static boolean gameIsOver(Message message) {
+        return "gameOver".equals(message.getType());
     }
 }
 
