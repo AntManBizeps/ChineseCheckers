@@ -2,46 +2,34 @@ package org.AAKB.client;
 
 import java.io.*;
 import java.net.*;
-import java.util.Scanner;
-
-import org.AAKB.server.Message;
 
 import static org.AAKB.constants.ConstantProperties.*;
 
 public class Client {
     public static void main(String[] args) {
         try (Socket socket = new Socket(SERVER_ADDRESS, SERVER_PORT);
-             ObjectOutputStream out = new ObjectOutputStream(socket.getOutputStream());
-             ObjectInputStream in = new ObjectInputStream(socket.getInputStream());
-             Scanner scanner = new Scanner(System.in)) {
+             PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
+             BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+             BufferedReader userInput = new BufferedReader(new InputStreamReader(System.in))) {
 
-            System.out.println("Enter your name:");
-            String name = scanner.nextLine();
-            out.writeObject(new Message("join", name));
-
-            while (true) {
-                Message serverMessage = (Message) in.readObject();
-                if ("gameStarted".equals(serverMessage.getType())) {
-                    System.out.println("Game has started!");
-                } else if ("move".equals(serverMessage.getType())) {
-                    System.out.println("Move received: " + serverMessage.getContent());
+            new Thread(() -> {
+                try {
+                    String response;
+                    while ((response = in.readLine()) != null) {
+                        System.out.println(response);
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
                 }
+            }).start();
 
-                if (serverMessage == null || gameIsOver(serverMessage)) {
-                    break;
-                }
-
-                System.out.println("Your turn! Enter your move:");
-                String move = scanner.nextLine();
-                out.writeObject(new Message("move", move));
+            String userInputLine;
+            while ((userInputLine = userInput.readLine()) != null) {
+                out.println(userInputLine);
             }
-        } catch (Exception e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
-    }
-
-    private static boolean gameIsOver(Message message) {
-        return "gameOver".equals(message.getType());
     }
 }
 
