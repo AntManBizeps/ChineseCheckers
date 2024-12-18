@@ -3,12 +3,16 @@ package org.AAKB.server;
 import java.io.*;
 import java.net.*;
 import java.util.*;
+import java.util.concurrent.atomic.AtomicInteger;
+
+import static org.AAKB.server.ClientHandlerHelper.*;
+
 
 public class ClientHandler extends Thread {
     private static Set<PrintWriter> clientWriters = new HashSet<>();
     private static Map<PrintWriter, Integer> playerIds = new HashMap<>();
-    private static int totalPlayers = 0;
-    private static int currentPlayers = 0;
+    private static AtomicInteger totalPlayers = new AtomicInteger(0);
+    private static AtomicInteger currentPlayers = new AtomicInteger(0);
     private static boolean gameStarted = false;
     private static int currentTurn = 0;
 
@@ -29,33 +33,43 @@ public class ClientHandler extends Thread {
                 clientWriters.add(out);
             }
 
-            // Handle player setup
-            if (totalPlayers == 0) {
-                out.println("Enter the number of players:");
-                totalPlayers = Integer.parseInt(in.readLine());
-                out.println("Waiting for " + totalPlayers + " players to join...");
-            }
+            out.println("You have been connected to the server successfully...");
 
             synchronized (clientWriters) {
-                playerId = currentPlayers + 1; // Assign player ID (1-based)
+                playerId = currentPlayers.incrementAndGet(); // Assign player ID (1-based), increment currentPlayers by 1
                 playerIds.put(out, playerId);
-                currentPlayers++;
-                if (currentPlayers == totalPlayers) {
-                    out.println("All players connected. Type 'start' to begin the game.");
+            }
+
+            // Handle player setup
+            while(totalPlayers.get() == 0) {
+                out.println("Enter the correct number of players:");
+                int givenNumber = 0;
+                try {
+                    givenNumber = Integer.parseInt(in.readLine());
+                } catch (NumberFormatException e) {
                 }
+                if(validateNumberOfPlayers(givenNumber)){
+                    totalPlayers.set(givenNumber);
+                }
+            }
+
+            if (currentPlayers.get() == totalPlayers.get()) {
+                broadcast("All players connected. Type 'start' to begin the game.");
+            } else {
+                broadcast("Waiting for " + (totalPlayers.get() - currentPlayers.get()) + " more players to join...");
             }
 
             while (true) {
                 String input = in.readLine();
                 if (input == null) break;
 
-                if (input.equalsIgnoreCase("start") && currentPlayers == totalPlayers) {
+                if (input.equalsIgnoreCase("start") && currentPlayers.get() == totalPlayers.get()) {
                     gameStarted = true;
                     broadcast("Game started! Player 1's turn.");
                 } else if (gameStarted) {
                     if (playerId == currentTurn + 1) { // Check if it's the player's turn
                         broadcast("Player " + playerId + " moved: " + input);
-                        currentTurn = (currentTurn + 1) % currentPlayers;
+                        currentTurn = (currentTurn + 1) % currentPlayers.get();
                         broadcast("Player " + (currentTurn + 1) + "'s turn.");
                     } else {
                         out.println("It's not your turn!");
@@ -75,9 +89,9 @@ public class ClientHandler extends Thread {
             synchronized (clientWriters) {
                 clientWriters.remove(out);
                 playerIds.remove(out);
-                currentPlayers--;
-                if (currentPlayers == 0) {
-                    totalPlayers = 0;
+                currentPlayers.decrementAndGet();
+                if (currentPlayers.get() == 0) {
+                    totalPlayers.set(0);
                     gameStarted = false;
                 }
             }
