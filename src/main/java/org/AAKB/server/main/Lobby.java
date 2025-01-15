@@ -1,4 +1,6 @@
-package org.AAKB.server;
+package org.AAKB.server.main;
+
+import org.AAKB.server.player.Rookie;
 
 import java.net.ServerSocket;
 import java.util.*;
@@ -69,7 +71,11 @@ public class Lobby {
 
     private void closeAllInOut(){
         for(Rookie rookie: rookieList) {
-            rookie.closeInOut();
+            try {
+                rookie.getCommunicationManager().close();
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
         }
     }
 }

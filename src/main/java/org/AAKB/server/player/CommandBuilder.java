@@ -10,7 +10,7 @@ public class CommandBuilder {
     /**
      * Dodaje dany kod do komendy i rozdziela go znakiem '@' od innych
      */
-    void addCommand(String code)
+    public void addCommand(String code)
     {
         if (command.toString().isEmpty())
         {
@@ -25,7 +25,7 @@ public class CommandBuilder {
     /**
      * Dodaje kod wraz z jego danymi do komendy
      */
-    void addCommand(String code, String data)
+    public void addCommand(String code, String data)
     {
         if (command.toString().isEmpty())
         {

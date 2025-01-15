@@ -1,4 +1,4 @@
-package org.AAKB.server;
+package org.AAKB.server.main;
 
 import java.net.*;
 

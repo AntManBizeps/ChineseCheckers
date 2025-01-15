@@ -10,10 +10,10 @@ public class CommunicationManager {
     private BufferedReader in;
     private PrintWriter out;
 
-    public CommunicationManager(Socket socket, BufferedReader in, PrintWriter out) throws Exception {
+    public CommunicationManager(Socket socket) throws Exception {
         this.socket = socket;
-        this.in = in;
-        this.out = out;
+        this.in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+        this.out = new PrintWriter(socket.getOutputStream(), true);
     }
 
     public String readLine() throws Exception {
