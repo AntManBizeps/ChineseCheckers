@@ -38,7 +38,7 @@ public class GameMaster {
             case 6:
                 return new PlayerColor[]{PlayerColor.RED, PlayerColor.GREEN, PlayerColor.BLUE, PlayerColor.ORANGE, PlayerColor.YELLOW, PlayerColor.VIOLET};
         }
-        throw new RuntimeException( "Given wrong number of players: " + numberOfPlayers );
+        throw new RuntimeException( "FALSE Given wrong number of players: " + numberOfPlayers );
     }
 
     /**

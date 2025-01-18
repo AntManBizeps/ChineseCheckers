@@ -27,14 +27,14 @@ public class Lobby {
             while((totalPlayers.get() == 0 && currentPlayers.get() <6) || (totalPlayers.get() != 0 && currentPlayers.get() < totalPlayers.get())) {
                 addRookie();
                 if(totalPlayers.get() != 0 & currentPlayers.get() != totalPlayers.get()) {
-                    broadcast("LOBBY: Waiting for " + (totalPlayers.get() - currentPlayers.get()) + " player(s) to jon...");
+                    broadcast("LOBBY Waiting for " + (totalPlayers.get() - currentPlayers.get()) + " player(s) to jon...");
                 }
             }
-            broadcast("LOBBY: All players have been join, preparing the game...");
+            broadcast("LOBBY All players have been join, preparing the game...");
             createNewGame(rookieList);
 
         } catch (Exception e) {
-            broadcast("LOBBY: Error: " + e.getMessage());
+            broadcast("LOBBY Error: " + e.getMessage());
             throw new RuntimeException(e);
         }
     }
@@ -51,10 +51,10 @@ public class Lobby {
             int numberOfPlayers = rookie.askForNumberOfPlayers();
             if(numberOfPlayers != -1) {
                 totalPlayers.addAndGet(numberOfPlayers);
-                broadcast("CHOOSE: Game for "+ totalPlayers.get() + " player(s) has been chosen.");
+                broadcast("LOBBY Game for "+ totalPlayers.get() + " player(s) has been chosen.");
             }
             if(totalPlayers.get() != 0 & rookie.getId() != 1) {
-                rookie.sendMessage("LOBBY: Game for "+ totalPlayers.get() + " player(s) has been chosen.");
+                rookie.sendMessage("LOBBY Game for "+ totalPlayers.get() + " player(s) has been chosen.");
             }
         }
     }

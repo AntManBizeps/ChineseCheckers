@@ -15,16 +15,16 @@ public class Rookie{
         this.id = new AtomicInteger(id);
         try{
             this.communicationManager = new CommunicationManager(socket);
-            communicationManager.writeLine("Congratulations, you have been connected to the server. Please wait...");
+            communicationManager.writeLine("LOBBY Congratulations, you have been connected to the server. Please wait...");
         } catch (Exception e) {
-            throw new Exception("Rookie can't establish connection");
+            throw new Exception("FALSE Rookie can't establish connection");
         }
     }
 
     public int askForNumberOfPlayers() {
         if(id.get() == 1){
             while(true){
-                communicationManager.writeLine("Choose number of players (2, 3, 4, 6): ");
+                communicationManager.writeLine("CHOOSE Choose number of players (2, 3, 4, 6): ");
                 int input = 0;
                 try {
                     input = Integer.parseInt(communicationManager.readLine());

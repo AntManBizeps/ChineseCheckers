@@ -28,28 +28,28 @@ public class RealPlayer extends AbstractPlayer implements Runnable {
                 if (input == null) break;
 
                 if(game.getCurrentPlayerTurn() == getId() && input.startsWith("SKIP")){
-                    communicationManager.writeLine("GAME: You skipped your turn.");
+                    communicationManager.writeLine("GAME You skipped your turn.");
                     game.nextTurn();
                 } else if(game.getCurrentPlayerTurn() == getId() && input.startsWith("MOVE")){
                     Move move = game.processMove(input);
                     if(move == null){
-                        communicationManager.writeLine("FALSE: Invalid move. Try again.");
+                        communicationManager.writeLine("FALSE Invalid move. Try again.");
                     } else {
-                        communicationManager.writeLine("GAME: Moved.");
+                        communicationManager.writeLine("GAME Moved.");
                     }
                 } else if(game.getCurrentPlayerTurn() == getId()){
-                    communicationManager.writeLine("FALSE: Command not recognized. Try again.");
+                    communicationManager.writeLine("FALSE Command not recognized. Try again.");
                 } else {
-                    communicationManager.writeLine("FALSE: Not your turn. Please wait...");
+                    communicationManager.writeLine("FALSE Not your turn. Please wait...");
                 }
             }while(!game.hasWinner());
             AbstractPlayer winner = game.hosIsWinner();
             if(winner != null && winner != this){
-                communicationManager.writeLine("LOST: YOU LOST! Player " + getId() + " wins!");
+                communicationManager.writeLine("LOST YOU LOST! Player " + getId() + " wins!");
             } else if(winner != null){
-                communicationManager.writeLine("WIN: YOU WON!");
+                communicationManager.writeLine("WIN YOU WON!");
             } else {
-                communicationManager.writeLine("NONE: Nobody wins.");
+                communicationManager.writeLine("NONE Nobody wins.");
             }
 
         } catch (Exception e){
@@ -61,7 +61,7 @@ public class RealPlayer extends AbstractPlayer implements Runnable {
 
     public void sendStartBoard() {
         CommandBuilder commandBuilder = new CommandBuilder();
-        commandBuilder.addCommand("GAME: Welcome", getColor() + " "+ getId());
+        commandBuilder.addCommand("GAME Welcome", getColor() + " "+ getId());
         sendCommand(commandBuilder.getCommand());
 
         commandBuilder = new CommandBuilder();
