@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Circle?>
+
+<VBox xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.AAKB.client.board.Controller" prefHeight="800.0" prefWidth="800.0">
+    <!-- Menu górne -->
+    <MenuBar>
+        <Menu text="Plik">
+            <MenuItem text="Nowa gra" onAction="#onNewGame"/>
+            <MenuItem text="Zakończ" onAction="#onExit"/>
+        </Menu>
+        <Menu text="Pomoc">
+            <MenuItem text="Jak grać" onAction="#onHelp"/>
+            <MenuItem text="O programie" onAction="#onAbout"/>
+        </Menu>
+    </MenuBar>
+
+    <!-- Pasek informacji -->
+    <Label fx:id="infoBar" text="Witamy w grze Chińskie Warcaby!" prefHeight="30.0" style="-fx-background-color: orange; -fx-text-fill: white; -fx-alignment: center;"/>
+
+    <!-- Plansza gry -->
+     <Pane fx:id="boardPane" prefHeight="200.0" prefWidth="800.0" style="-fx-background-color:rgb(185, 183, 177);" VBox.vgrow="ALWAYS">
+        <Circle disable="true" fill="#ffffff00" layoutX="88.0" layoutY="40.0" radius="24.0" stroke="#00000080" strokeType="INSIDE" />
+        <Circle disable="true" fill="#ffffff00" layoutX="140.0" layoutY="40.0" radius="24.0" stroke="#00000080" strokeType="INSIDE" />
+        <Circle disable="true" fill="#ffffff00" layoutX="192.0" layoutY="40.0" radius="24.0" stroke="#00000080" strokeType="INSIDE" />
+        <Circle disable="true" fill="#ffffff00" layoutX="244.0" layoutY="40.0" radius="24.0" stroke="#00000080" strokeType="INSIDE" />
+        <Circle disable="true" fill="#ffffff00" layoutX="296.0" layoutY="40.0" radius="24.0" stroke="#00000080" strokeType="INSIDE" />
+        <Circle disable="true" fill="#ffffff00" layoutX="348.0" layoutY="40.0" radius="24.0" stroke="#00000080" strokeType="INSIDE" />
+        <Circle fill="WHITE" layoutX="400.0" layoutY="40.0" radius="24.0" stroke="#0bab00" strokeType="INSIDE" strokeWidth="6.0" />
+        <Circle disable="true" fill="#ffffff00" layoutX="452.0" layoutY="40.0" radius="24.0" stroke="#00000080" strokeType="INSIDE" />
+        <Circle disable="true" fill="#ffffff00" layoutX="504.0" layoutY="40.0" radius="24.0" stroke="#00000080" strokeType="INSIDE" />
+        <Circle disable="true" fill="#ffffff00" layoutX="556.0" layoutY="40.0" radius="24.0" stroke="#00000080" strokeType="INSIDE" />
+        <Circle disable="true" fill="#ffffff00" layoutX="608.0" layoutY="40.0" radius="24.0" stroke="#00000080" strokeType="INSIDE" />
+        <Circle disable="true" fill="#ffffff00" layoutX="660.0" layoutY="40.0" radius="24.0" stroke="#00000080" strokeType="INSIDE" />
+        <Circle disable="true" fill="#ffffff00" layoutX="712.0" layoutY="40.0" radius="24.0" stroke="#00000080" strokeType="INSIDE" />
+        <Circle disable="true" fill="#ffffff00" layoutX="114.0" layoutY="85.0" radius="24.0" stroke="#00000080" strokeType="INSIDE" />
+        <Circle disable="true" fill="#ffffff00" layoutX="166.0" layoutY="85.0" radius="24.0" stroke="#00000080" strokeType="INSIDE" />
+        <Circle disable="true" fill="#ffffff00" layoutX="218.0" layoutY="85.0" radius="24.0" stroke="#00000080" strokeType="INSIDE" />
+        <Circle disable="true" fill="#ffffff00" layoutX="270.0" layoutY="85.0" radius="24.0" stroke="#00000080" strokeType="INSIDE" />
+        <Circle disable="true" fill="#ffffff00" layoutX="322.0" layoutY="85.0" radius="24.0" stroke="#00000080" strokeType="INSIDE" />
+        <Circle fill="WHITE" layoutX="374.0" layoutY="85.0" radius="24.0" stroke="#0bab00" strokeType="INSIDE" strokeWidth="6.0" />
+        <Circle fill="WHITE" layoutX="426.0" layoutY="85.0" radius="24.0" stroke="#0bab00" strokeType="INSIDE" strokeWidth="6.0" />
+        <Circle disable="true" fill="#ffffff00" layoutX="478.0" layoutY="85.0" radius="24.0" stroke="#00000080" strokeType="INSIDE" />
+        <Circle disable="true" fill="#ffffff00" layoutX="530.0" layoutY="85.0" radius="24.0" stroke="#00000080" strokeType="INSIDE" />
+        <Circle disable="true" fill="#ffffff00" layoutX="582.0" layoutY="85.0" radius="24.0" stroke="#00000080" strokeType="INSIDE" />
+        <Circle disable="true" fill="#ffffff00" layoutX="634.0" layoutY="85.0" radius="24.0" stroke="#00000080" strokeType="INSIDE" />
+        <Circle disable="true" fill="#ffffff00" layoutX="686.0" layoutY="85.0" radius="24.0" stroke="#00000080" strokeType="INSIDE" />
+        <Circle disable="true" fill="#ffffff00" layoutX="738.0" layoutY="85.0" radius="24.0" stroke="#00000080" strokeType="INSIDE" />
+        <Circle disable="true" fill="#ffffff00" layoutX="88.0" layoutY="130.0" radius="24.0" stroke="#00000080" strokeType="INSIDE" />
+        <Circle disable="true" fill="#ffffff00" layoutX="140.0" layoutY="130.0" radius="24.0" stroke="#00000080" strokeType="INSIDE" />
+        <Circle disable="true" fill="#ffffff00" layoutX="192.0" layoutY="130.0" radius="24.0" stroke="#00000080" strokeType="INSIDE" />
+        <Circle disable="true" fill="#ffffff00" layoutX="244.0" layoutY="130.0" radius="24.0" stroke="#00000080" strokeType="INSIDE" />
+        <Circle disable="true" fill="#ffffff00" layoutX="296.0" layoutY="130.0" radius="24.0" stroke="#00000080" strokeType="INSIDE" />
+        <Circle fill="WHITE" layoutX="348.0" layoutY="130.0" radius="24.0" stroke="#0bab00" strokeType="INSIDE" strokeWidth="6.0" />
+        <Circle fill="WHITE" layoutX="400.0" layoutY="130.0" radius="24.0" stroke="#0bab00" strokeType="INSIDE" strokeWidth="6.0" />
+        <Circle fill="WHITE" layoutX="452.0" layoutY="130.0" radius="24.0" stroke="#0bab00" strokeType="INSIDE" strokeWidth="6.0" />
+        <Circle disable="true" fill="#ffffff00" layoutX="504.0" layoutY="130.0" radius="24.0" stroke="#00000080" strokeType="INSIDE" />
+        <Circle disable="true" fill="#ffffff00" layoutX="556.0" layoutY="130.0" radius="24.0" stroke="#00000080" strokeType="INSIDE" />
+        <Circle disable="true" fill="#ffffff00" layoutX="608.0" layoutY="130.0" radius="24.0" stroke="#00000080" strokeType="INSIDE" />
+        <Circle disable="true" fill="#ffffff00" layoutX="660.0" layoutY="130.0" radius="24.0" stroke="#00000080" strokeType="INSIDE" />
+        <Circle disable="true" fill="#ffffff00" layoutX="712.0" layoutY="130.0" radius="24.0" stroke="#00000080" strokeType="INSIDE" />
+        <Circle disable="true" fill="#ffffff00" layoutX="114.0" layoutY="175.0" radius="24.0" stroke="#00000080" strokeType="INSIDE" />
+        <Circle disable="true" fill="#ffffff00" layoutX="166.0" layoutY="175.0" radius="24.0" stroke="#00000080" strokeType="INSIDE" />
+        <Circle disable="true" fill="#ffffff00" layoutX="218.0" layoutY="175.0" radius="24.0" stroke="#00000080" strokeType="INSIDE" />
+        <Circle disable="true" fill="#ffffff00" layoutX="270.0" layoutY="175.0" radius="24.0" stroke="#00000080" strokeType="INSIDE" />
+        <Circle fill="WHITE" layoutX="322.0" layoutY="175.0" radius="24.0" stroke="#0bab00" strokeType="INSIDE" strokeWidth="6.0" />
+        <Circle fill="WHITE" layoutX="374.0" layoutY="175.0" radius="24.0" stroke="#0bab00" strokeType="INSIDE" strokeWidth="6.0" />
+        <Circle fill="WHITE" layoutX="426.0" layoutY="175.0" radius="24.0" stroke="#0bab00" strokeType="INSIDE" strokeWidth="6.0" />
+        <Circle fill="WHITE" layoutX="478.0" layoutY="175.0" radius="24.0" stroke="#0bab00" strokeType="INSIDE" strokeWidth="6.0" />
+        <Circle disable="true" fill="#ffffff00" layoutX="530.0" layoutY="175.0" radius="24.0" stroke="#00000080" strokeType="INSIDE" />
+        <Circle disable="true" fill="#ffffff00" layoutX="582.0" layoutY="175.0" radius="24.0" stroke="#00000080" strokeType="INSIDE" />
+        <Circle disable="true" fill="#ffffff00" layoutX="634.0" layoutY="175.0" radius="24.0" stroke="#00000080" strokeType="INSIDE" />
+        <Circle disable="true" fill="#ffffff00" layoutX="686.0" layoutY="175.0" radius="24.0" stroke="#00000080" strokeType="INSIDE" />
+        <Circle disable="true" fill="#ffffff00" layoutX="738.0" layoutY="175.0" radius="24.0" stroke="#00000080" strokeType="INSIDE" />
+        <Circle fill="WHITE" layoutX="88.0" layoutY="220.0" radius="24.0" stroke="BLUE" strokeType="INSIDE" strokeWidth="6.0" />
+        <Circle fill="WHITE" layoutX="140.0" layoutY="220.0" radius="24.0" stroke="BLUE" strokeType="INSIDE" strokeWidth="6.0" />
+        <Circle fill="WHITE" layoutX="192.0" layoutY="220.0" radius="24.0" stroke="BLUE" strokeType="INSIDE" strokeWidth="6.0" />
+        <Circle fill="WHITE" layoutX="244.0" layoutY="220.0" radius="24.0" stroke="BLUE" strokeType="INSIDE" strokeWidth="6.0" />
+        <Circle fill="WHITE" layoutX="296.0" layoutY="220.0" radius="24.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="2.0" />
+        <Circle fill="WHITE" layoutX="348.0" layoutY="220.0" radius="24.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="2.0" />
+        <Circle fill="WHITE" layoutX="400.0" layoutY="220.0" radius="24.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="2.0" />
+        <Circle fill="WHITE" layoutX="452.0" layoutY="220.0" radius="24.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="2.0" />
+        <Circle fill="WHITE" layoutX="504.0" layoutY="220.0" radius="24.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="2.0" />
+        <Circle fill="WHITE" layoutX="556.0" layoutY="220.0" radius="24.0" stroke="#e1ff00" strokeType="INSIDE" strokeWidth="6.0" />
+        <Circle fill="WHITE" layoutX="608.0" layoutY="220.0" radius="24.0" stroke="#e1ff00" strokeType="INSIDE" strokeWidth="6.0" />
+        <Circle fill="WHITE" layoutX="660.0" layoutY="220.0" radius="24.0" stroke="#e1ff00" strokeType="INSIDE" strokeWidth="6.0" />
+        <Circle fill="WHITE" layoutX="712.0" layoutY="220.0" radius="24.0" stroke="#e1ff00" strokeType="INSIDE" strokeWidth="6.0" />
+        <Circle fill="WHITE" layoutX="114.0" layoutY="265.0" radius="24.0" stroke="BLUE" strokeType="INSIDE" strokeWidth="6.0" />
+        <Circle fill="WHITE" layoutX="166.0" layoutY="265.0" radius="24.0" stroke="BLUE" strokeType="INSIDE" strokeWidth="6.0" />
+        <Circle fill="WHITE" layoutX="218.0" layoutY="265.0" radius="24.0" stroke="BLUE" strokeType="INSIDE" strokeWidth="6.0" />
+        <Circle fill="WHITE" layoutX="270.0" layoutY="265.0" radius="24.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="2.0" />
+        <Circle fill="WHITE" layoutX="322.0" layoutY="265.0" radius="24.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="2.0" />
+        <Circle fill="WHITE" layoutX="374.0" layoutY="265.0" radius="24.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="2.0" />
+        <Circle fill="WHITE" layoutX="426.0" layoutY="265.0" radius="24.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="2.0" />
+        <Circle fill="WHITE" layoutX="478.0" layoutY="265.0" radius="24.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="2.0" />
+        <Circle fill="WHITE" layoutX="530.0" layoutY="265.0" radius="24.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="2.0" />
+        <Circle fill="WHITE" layoutX="582.0" layoutY="265.0" radius="24.0" stroke="#e1ff00" strokeType="INSIDE" strokeWidth="6.0" />
+        <Circle fill="WHITE" layoutX="634.0" layoutY="265.0" radius="24.0" stroke="#e1ff00" strokeType="INSIDE" strokeWidth="6.0" />
+        <Circle fill="WHITE" layoutX="686.0" layoutY="265.0" radius="24.0" stroke="#e1ff00" strokeType="INSIDE" strokeWidth="6.0" />
+        <Circle disable="true" fill="#ffffff00" layoutX="738.0" layoutY="265.0" radius="24.0" stroke="#00000080" strokeType="INSIDE" />
+        <Circle disable="true" fill="#ffffff00" layoutX="88.0" layoutY="310.0" radius="24.0" stroke="#00000080" strokeType="INSIDE" />
+        <Circle fill="WHITE" layoutX="140.0" layoutY="310.0" radius="24.0" stroke="BLUE" strokeType="INSIDE" strokeWidth="6.0" />
+        <Circle fill="WHITE" layoutX="192.0" layoutY="310.0" radius="24.0" stroke="BLUE" strokeType="INSIDE" strokeWidth="6.0" />
+        <Circle fill="WHITE" layoutX="244.0" layoutY="310.0" radius="24.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="2.0" />
+        <Circle fill="WHITE" layoutX="296.0" layoutY="310.0" radius="24.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="2.0" />
+        <Circle fill="WHITE" layoutX="348.0" layoutY="310.0" radius="24.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="2.0" />
+        <Circle fill="WHITE" layoutX="400.0" layoutY="310.0" radius="24.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="2.0" />
+        <Circle fill="WHITE" layoutX="452.0" layoutY="310.0" radius="24.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="2.0" />
+        <Circle fill="WHITE" layoutX="504.0" layoutY="310.0" radius="24.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="2.0" />
+        <Circle fill="WHITE" layoutX="556.0" layoutY="310.0" radius="24.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="2.0" />
+        <Circle fill="WHITE" layoutX="608.0" layoutY="310.0" radius="24.0" stroke="#e1ff00" strokeType="INSIDE" strokeWidth="6.0" />
+        <Circle fill="WHITE" layoutX="660.0" layoutY="310.0" radius="24.0" stroke="#e1ff00" strokeType="INSIDE" strokeWidth="6.0" />
+        <Circle disable="true" fill="#ffffff00" layoutX="712.0" layoutY="310.0" radius="24.0" stroke="#00000080" strokeType="INSIDE" />
+        <Circle disable="true" fill="#ffffff00" layoutX="114.0" layoutY="355.0" radius="24.0" stroke="#00000080" strokeType="INSIDE" />
+        <Circle fill="WHITE" layoutX="166.0" layoutY="355.0" radius="24.0" stroke="BLUE" strokeType="INSIDE" strokeWidth="6.0" />
+        <Circle fill="WHITE" layoutX="218.0" layoutY="355.0" radius="24.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="2.0" />
+        <Circle fill="WHITE" layoutX="270.0" layoutY="355.0" radius="24.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="2.0" />
+        <Circle fill="WHITE" layoutX="322.0" layoutY="355.0" radius="24.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="2.0" />
+        <Circle fill="WHITE" layoutX="374.0" layoutY="355.0" radius="24.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="2.0" />
+        <Circle fill="WHITE" layoutX="426.0" layoutY="355.0" radius="24.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="2.0" />
+        <Circle fill="WHITE" layoutX="478.0" layoutY="355.0" radius="24.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="2.0" />
+        <Circle fill="WHITE" layoutX="530.0" layoutY="355.0" radius="24.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="2.0" />
+        <Circle fill="WHITE" layoutX="582.0" layoutY="355.0" radius="24.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="2.0" />
+        <Circle fill="WHITE" layoutX="634.0" layoutY="355.0" radius="24.0" stroke="#e1ff00" strokeType="INSIDE" strokeWidth="6.0" />
+        <Circle disable="true" fill="#ffffff00" layoutX="686.0" layoutY="355.0" radius="24.0" stroke="#00000080" strokeType="INSIDE" />
+        <Circle disable="true" fill="#ffffff00" layoutX="738.0" layoutY="355.0" radius="24.0" stroke="#00000080" strokeType="INSIDE" />
+        <Circle disable="true" fill="#ffffff00" layoutX="88.0" layoutY="400.0" radius="24.0" stroke="#00000080" strokeType="INSIDE" />
+        <Circle disable="true" fill="#ffffff00" layoutX="140.0" layoutY="400.0" radius="24.0" stroke="#00000080" strokeType="INSIDE" />
+        <Circle fill="WHITE" layoutX="192.0" layoutY="400.0" radius="24.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="2.0" />
+        <Circle fill="WHITE" layoutX="244.0" layoutY="400.0" radius="24.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="2.0" />
+        <Circle fill="WHITE" layoutX="296.0" layoutY="400.0" radius="24.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="2.0" />
+        <Circle fill="WHITE" layoutX="348.0" layoutY="400.0" radius="24.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="2.0" />
+        <Circle fill="WHITE" layoutX="400.0" layoutY="400.0" radius="24.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="2.0" />
+        <Circle fill="WHITE" layoutX="452.0" layoutY="400.0" radius="24.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="2.0" />
+        <Circle fill="WHITE" layoutX="504.0" layoutY="400.0" radius="24.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="2.0" />
+        <Circle fill="WHITE" layoutX="556.0" layoutY="400.0" radius="24.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="2.0" />
+        <Circle fill="WHITE" layoutX="608.0" layoutY="400.0" radius="24.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="2.0" />
+        <Circle disable="true" fill="#ffffff00" layoutX="660.0" layoutY="400.0" radius="24.0" stroke="#00000080" strokeType="INSIDE" />
+        <Circle disable="true" fill="#ffffff00" layoutX="712.0" layoutY="400.0" radius="24.0" stroke="#00000080" strokeType="INSIDE" />
+        <Circle disable="true" fill="#ffffff00" layoutX="114.0" layoutY="445.0" radius="24.0" stroke="#00000080" strokeType="INSIDE" />
+        <Circle fill="WHITE" layoutX="166.0" layoutY="445.0" radius="24.0" stroke="#ff00dd" strokeType="INSIDE" strokeWidth="6.0" />
+        <Circle fill="WHITE" layoutX="218.0" layoutY="445.0" radius="24.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="2.0" />
+        <Circle fill="WHITE" layoutX="270.0" layoutY="445.0" radius="24.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="2.0" />
+        <Circle fill="WHITE" layoutX="322.0" layoutY="445.0" radius="24.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="2.0" />
+        <Circle fill="WHITE" layoutX="374.0" layoutY="445.0" radius="24.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="2.0" />
+        <Circle fill="WHITE" layoutX="426.0" layoutY="445.0" radius="24.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="2.0" />
+        <Circle fill="WHITE" layoutX="478.0" layoutY="445.0" radius="24.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="2.0" />
+        <Circle fill="WHITE" layoutX="530.0" layoutY="445.0" radius="24.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="2.0" />
+        <Circle fill="WHITE" layoutX="582.0" layoutY="445.0" radius="24.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="2.0" />
+        <Circle fill="WHITE" layoutX="634.0" layoutY="445.0" radius="24.0" stroke="#ff6f00" strokeType="INSIDE" strokeWidth="6.0" />
+        <Circle disable="true" fill="#ffffff00" layoutX="686.0" layoutY="445.0" radius="24.0" stroke="#00000080" strokeType="INSIDE" />
+        <Circle disable="true" fill="#ffffff00" layoutX="738.0" layoutY="445.0" radius="24.0" stroke="#00000080" strokeType="INSIDE" />
+        <Circle disable="true" fill="#ffffff00" layoutX="88.0" layoutY="490.0" radius="24.0" stroke="#00000080" strokeType="INSIDE" />
+        <Circle fill="WHITE" layoutX="140.0" layoutY="490.0" radius="24.0" stroke="#ff00dd" strokeType="INSIDE" strokeWidth="6.0" />
+        <Circle fill="WHITE" layoutX="192.0" layoutY="490.0" radius="24.0" stroke="#ff00dd" strokeType="INSIDE" strokeWidth="6.0" />
+        <Circle fill="WHITE" layoutX="244.0" layoutY="490.0" radius="24.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="2.0" />
+        <Circle fill="WHITE" layoutX="296.0" layoutY="490.0" radius="24.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="2.0" />
+        <Circle fill="WHITE" layoutX="348.0" layoutY="490.0" radius="24.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="2.0" />
+        <Circle fill="WHITE" layoutX="400.0" layoutY="490.0" radius="24.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="2.0" />
+        <Circle fill="WHITE" layoutX="452.0" layoutY="490.0" radius="24.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="2.0" />
+        <Circle fill="WHITE" layoutX="504.0" layoutY="490.0" radius="24.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="2.0" />
+        <Circle fill="WHITE" layoutX="556.0" layoutY="490.0" radius="24.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="2.0" />
+        <Circle fill="WHITE" layoutX="608.0" layoutY="490.0" radius="24.0" stroke="#ff6f00" strokeType="INSIDE" strokeWidth="6.0" />
+        <Circle fill="WHITE" layoutX="660.0" layoutY="490.0" radius="24.0" stroke="#ff6f00" strokeType="INSIDE" strokeWidth="6.0" />
+        <Circle disable="true" fill="#ffffff00" layoutX="712.0" layoutY="490.0" radius="24.0" stroke="#00000080" strokeType="INSIDE" />
+        <Circle fill="WHITE" layoutX="114.0" layoutY="535.0" radius="24.0" stroke="#ff00dd" strokeType="INSIDE" strokeWidth="6.0" />
+        <Circle fill="WHITE" layoutX="166.0" layoutY="535.0" radius="24.0" stroke="#ff00dd" strokeType="INSIDE" strokeWidth="6.0" />
+        <Circle fill="WHITE" layoutX="218.0" layoutY="535.0" radius="24.0" stroke="#ff00dd" strokeType="INSIDE" strokeWidth="6.0" />
+        <Circle fill="WHITE" layoutX="270.0" layoutY="535.0" radius="24.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="2.0" />
+        <Circle fill="WHITE" layoutX="322.0" layoutY="535.0" radius="24.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="2.0" />
+        <Circle fill="WHITE" layoutX="374.0" layoutY="535.0" radius="24.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="2.0" />
+        <Circle fill="WHITE" layoutX="426.0" layoutY="535.0" radius="24.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="2.0" />
+        <Circle fill="WHITE" layoutX="478.0" layoutY="535.0" radius="24.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="2.0" />
+        <Circle fill="WHITE" layoutX="530.0" layoutY="535.0" radius="24.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="2.0" />
+        <Circle fill="WHITE" layoutX="582.0" layoutY="535.0" radius="24.0" stroke="#ff6f00" strokeType="INSIDE" strokeWidth="6.0" />
+        <Circle fill="WHITE" layoutX="634.0" layoutY="535.0" radius="24.0" stroke="#ff6f00" strokeType="INSIDE" strokeWidth="6.0" />
+        <Circle fill="WHITE" layoutX="686.0" layoutY="535.0" radius="24.0" stroke="#ff6f00" strokeType="INSIDE" strokeWidth="6.0" />
+        <Circle disable="true" fill="#ffffff00" layoutX="738.0" layoutY="535.0" radius="24.0" stroke="#00000080" strokeType="INSIDE" />
+        <Circle fill="WHITE" layoutX="88.0" layoutY="580.0" radius="24.0" stroke="#ff00dd" strokeType="INSIDE" strokeWidth="6.0" />
+        <Circle fill="WHITE" layoutX="140.0" layoutY="580.0" radius="24.0" stroke="#ff00dd" strokeType="INSIDE" strokeWidth="6.0" />
+        <Circle fill="WHITE" layoutX="192.0" layoutY="580.0" radius="24.0" stroke="#ff00dd" strokeType="INSIDE" strokeWidth="6.0" />
+        <Circle fill="WHITE" layoutX="244.0" layoutY="580.0" radius="24.0" stroke="#ff00dd" strokeType="INSIDE" strokeWidth="6.0" />
+        <Circle fill="WHITE" layoutX="296.0" layoutY="580.0" radius="24.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="2.0" />
+        <Circle fill="WHITE" layoutX="348.0" layoutY="580.0" radius="24.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="2.0" />
+        <Circle fill="WHITE" layoutX="400.0" layoutY="580.0" radius="24.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="2.0" />
+        <Circle fill="WHITE" layoutX="452.0" layoutY="580.0" radius="24.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="2.0" />
+        <Circle fill="WHITE" layoutX="504.0" layoutY="580.0" radius="24.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="2.0" />
+        <Circle fill="WHITE" layoutX="556.0" layoutY="580.0" radius="24.0" stroke="#ff6f00" strokeType="INSIDE" strokeWidth="6.0" />
+        <Circle fill="WHITE" layoutX="608.0" layoutY="580.0" radius="24.0" stroke="#ff6f00" strokeType="INSIDE" strokeWidth="6.0" />
+        <Circle fill="WHITE" layoutX="660.0" layoutY="580.0" radius="24.0" stroke="#ff6f00" strokeType="INSIDE" strokeWidth="6.0" />
+        <Circle fill="WHITE" layoutX="712.0" layoutY="580.0" radius="24.0" stroke="#ff6f00" strokeType="INSIDE" strokeWidth="6.0" />
+        <Circle disable="true" fill="#ffffff00" layoutX="114.0" layoutY="625.0" radius="24.0" stroke="#00000080" strokeType="INSIDE" />
+        <Circle disable="true" fill="#ffffff00" layoutX="166.0" layoutY="625.0" radius="24.0" stroke="#00000080" strokeType="INSIDE" />
+        <Circle disable="true" fill="#ffffff00" layoutX="218.0" layoutY="625.0" radius="24.0" stroke="#00000080" strokeType="INSIDE" />
+        <Circle disable="true" fill="#ffffff00" layoutX="270.0" layoutY="625.0" radius="24.0" stroke="#00000080" strokeType="INSIDE" />
+        <Circle fill="WHITE" layoutX="322.0" layoutY="625.0" radius="24.0" stroke="RED" strokeType="INSIDE" strokeWidth="6.0" />
+        <Circle fill="WHITE" layoutX="374.0" layoutY="625.0" radius="24.0" stroke="RED" strokeType="INSIDE" strokeWidth="6.0" />
+        <Circle fill="WHITE" layoutX="426.0" layoutY="625.0" radius="24.0" stroke="RED" strokeType="INSIDE" strokeWidth="6.0" />
+        <Circle fill="WHITE" layoutX="478.0" layoutY="625.0" radius="24.0" stroke="RED" strokeType="INSIDE" strokeWidth="6.0" />
+        <Circle disable="true" fill="#ffffff00" layoutX="530.0" layoutY="625.0" radius="24.0" stroke="#00000080" strokeType="INSIDE" />
+        <Circle disable="true" fill="#ffffff00" layoutX="582.0" layoutY="625.0" radius="24.0" stroke="#00000080" strokeType="INSIDE" />
+        <Circle disable="true" fill="#ffffff00" layoutX="634.0" layoutY="625.0" radius="24.0" stroke="#00000080" strokeType="INSIDE" />
+        <Circle disable="true" fill="#ffffff00" layoutX="686.0" layoutY="625.0" radius="24.0" stroke="#00000080" strokeType="INSIDE" />
+        <Circle disable="true" fill="#ffffff00" layoutX="738.0" layoutY="625.0" radius="24.0" stroke="#00000080" strokeType="INSIDE" />
+        <Circle disable="true" fill="#ffffff00" layoutX="88.0" layoutY="670.0" radius="24.0" stroke="#00000080" strokeType="INSIDE" />
+        <Circle disable="true" fill="#ffffff00" layoutX="140.0" layoutY="670.0" radius="24.0" stroke="#00000080" strokeType="INSIDE" />
+        <Circle disable="true" fill="#ffffff00" layoutX="192.0" layoutY="670.0" radius="24.0" stroke="#00000080" strokeType="INSIDE" />
+        <Circle disable="true" fill="#ffffff00" layoutX="244.0" layoutY="670.0" radius="24.0" stroke="#00000080" strokeType="INSIDE" />
+        <Circle disable="true" fill="#ffffff00" layoutX="296.0" layoutY="670.0" radius="24.0" stroke="#00000080" strokeType="INSIDE" />
+        <Circle fill="WHITE" layoutX="348.0" layoutY="670.0" radius="24.0" stroke="RED" strokeType="INSIDE" strokeWidth="6.0" />
+        <Circle fill="WHITE" layoutX="400.0" layoutY="670.0" radius="24.0" stroke="RED" strokeType="INSIDE" strokeWidth="6.0" />
+        <Circle fill="WHITE" layoutX="452.0" layoutY="670.0" radius="24.0" stroke="RED" strokeType="INSIDE" strokeWidth="6.0" />
+        <Circle disable="true" fill="#ffffff00" layoutX="504.0" layoutY="670.0" radius="24.0" stroke="#00000080" strokeType="INSIDE" />
+        <Circle disable="true" fill="#ffffff00" layoutX="556.0" layoutY="670.0" radius="24.0" stroke="#00000080" strokeType="INSIDE" />
+        <Circle disable="true" fill="#ffffff00" layoutX="608.0" layoutY="670.0" radius="24.0" stroke="#00000080" strokeType="INSIDE" />
+        <Circle disable="true" fill="#ffffff00" layoutX="660.0" layoutY="670.0" radius="24.0" stroke="#00000080" strokeType="INSIDE" />
+        <Circle disable="true" fill="#ffffff00" layoutX="712.0" layoutY="670.0" radius="24.0" stroke="#00000080" strokeType="INSIDE" />
+        <Circle disable="true" fill="#ffffff00" layoutX="114.0" layoutY="715.0" radius="24.0" stroke="#00000080" strokeType="INSIDE" />
+        <Circle disable="true" fill="#ffffff00" layoutX="166.0" layoutY="715.0" radius="24.0" stroke="#00000080" strokeType="INSIDE" />
+        <Circle disable="true" fill="#ffffff00" layoutX="218.0" layoutY="715.0" radius="24.0" stroke="#00000080" strokeType="INSIDE" />
+        <Circle disable="true" fill="#ffffff00" layoutX="270.0" layoutY="715.0" radius="24.0" stroke="#00000080" strokeType="INSIDE" />
+        <Circle disable="true" fill="#ffffff00" layoutX="322.0" layoutY="715.0" radius="24.0" stroke="#00000080" strokeType="INSIDE" />
+        <Circle fill="WHITE" layoutX="374.0" layoutY="715.0" radius="24.0" stroke="RED" strokeType="INSIDE" strokeWidth="6.0" />
+        <Circle fill="WHITE" layoutX="426.0" layoutY="715.0" radius="24.0" stroke="RED" strokeType="INSIDE" strokeWidth="6.0" />
+        <Circle disable="true" fill="#ffffff00" layoutX="478.0" layoutY="715.0" radius="24.0" stroke="#00000080" strokeType="INSIDE" />
+        <Circle disable="true" fill="#ffffff00" layoutX="530.0" layoutY="715.0" radius="24.0" stroke="#00000080" strokeType="INSIDE" />
+        <Circle disable="true" fill="#ffffff00" layoutX="582.0" layoutY="715.0" radius="24.0" stroke="#00000080" strokeType="INSIDE" />
+        <Circle disable="true" fill="#ffffff00" layoutX="634.0" layoutY="715.0" radius="24.0" stroke="#00000080" strokeType="INSIDE" />
+        <Circle disable="true" fill="#ffffff00" layoutX="686.0" layoutY="715.0" radius="24.0" stroke="#00000080" strokeType="INSIDE" />
+        <Circle disable="true" fill="#ffffff00" layoutX="738.0" layoutY="715.0" radius="24.0" stroke="#00000080" strokeType="INSIDE" />
+        <Circle disable="true" fill="#ffffff00" layoutX="88.0" layoutY="760.0" radius="24.0" stroke="#00000080" strokeType="INSIDE" />
+        <Circle disable="true" fill="#ffffff00" layoutX="140.0" layoutY="760.0" radius="24.0" stroke="#00000080" strokeType="INSIDE" />
+        <Circle disable="true" fill="#ffffff00" layoutX="192.0" layoutY="760.0" radius="24.0" stroke="#00000080" strokeType="INSIDE" />
+        <Circle disable="true" fill="#ffffff00" layoutX="244.0" layoutY="760.0" radius="24.0" stroke="#00000080" strokeType="INSIDE" />
+        <Circle disable="true" fill="#ffffff00" layoutX="296.0" layoutY="760.0" radius="24.0" stroke="#00000080" strokeType="INSIDE" />
+        <Circle disable="true" fill="#ffffff00" layoutX="348.0" layoutY="760.0" radius="24.0" stroke="#00000080" strokeType="INSIDE" />
+        <Circle fill="WHITE" layoutX="400.0" layoutY="760.0" radius="24.0" stroke="RED" strokeType="INSIDE" strokeWidth="6.0" />
+        <Circle disable="true" fill="#ffffff00" layoutX="452.0" layoutY="760.0" radius="24.0" stroke="#00000080" strokeType="INSIDE" />
+        <Circle disable="true" fill="#ffffff00" layoutX="504.0" layoutY="760.0" radius="24.0" stroke="#00000080" strokeType="INSIDE" />
+        <Circle disable="true" fill="#ffffff00" layoutX="556.0" layoutY="760.0" radius="24.0" stroke="#00000080" strokeType="INSIDE" />
+        <Circle disable="true" fill="#ffffff00" layoutX="608.0" layoutY="760.0" radius="24.0" stroke="#00000080" strokeType="INSIDE" />
+        <Circle disable="true" fill="#ffffff00" layoutX="660.0" layoutY="760.0" radius="24.0" stroke="#00000080" strokeType="INSIDE" />
+        <Circle disable="true" fill="#ffffff00" layoutX="712.0" layoutY="760.0" radius="24.0" stroke="#00000080" strokeType="INSIDE" />
+    </Pane>
+</VBox>

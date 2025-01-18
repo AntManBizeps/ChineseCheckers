@@ -78,7 +78,7 @@ public class Field {
         circle.setFill( gradient );
     }
 
-    PlayerColor getColor()
+    public PlayerColor getColor()
     {
         return color;
     }
