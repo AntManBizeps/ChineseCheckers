@@ -1,4 +1,4 @@
-package org.AAKB.server;
+package org.AAKB.server.movement;
 
 import org.AAKB.constants.Coordinates;
 import org.AAKB.constants.PlayerColor;
@@ -38,23 +38,23 @@ public class GameMaster {
             case 6:
                 return new PlayerColor[]{PlayerColor.RED, PlayerColor.GREEN, PlayerColor.BLUE, PlayerColor.ORANGE, PlayerColor.YELLOW, PlayerColor.VIOLET};
         }
-        throw new RuntimeException( "Given wrong number of players: " + numberOfPlayers );
+        throw new RuntimeException( "FALSE Given wrong number of players: " + numberOfPlayers );
     }
 
     /**
      * weryfikuje poprawność ruchu z pola (x1,y1) na pole (x2,y2) na podstawie podanych zasad movementstrategy
      */
 
-    public Move verifyMove(Move move)
+    public int verifyMove(Move move, AdditionalVerifyCondition[] additionalVerifyConditions)
     {
-        return movementStrategy.verifyMove(board, move);
+        return movementStrategy.verifyMove(board, move, additionalVerifyConditions);
     }
 
     /**
      * wykonuje ruch pionkiem z pola (x1,y1) na pole (x2,y2) na podstawie podanych zasad movementstrategy
      */
 
-    public void makeMove(Board board, Move move)
+    public void makeMove(Move move)
     {
         board = movementStrategy.makeMove(board, move);
     }
@@ -74,15 +74,15 @@ public class GameMaster {
         }
     }
 
-    public List<Coordinates> getPossibleMovesForPos(int x, int y)
+    public List<Coordinates> getPossibleMovesForPos(int x, int y, AdditionalVerifyCondition[] additionalVerifyConditions)
     {
-        Move result; // rezultat funkcji verifyMove (jeśli 0, to ruch niepoprawny)
+        int result; // rezultat funkcji verifyMove (jeśli 0, to ruch niepoprawny)
         List<Coordinates> possibleMoves = new ArrayList<>();
         List<Coordinates> nearbyCoords = board.getNearbyCoords( x, y );
         for( Coordinates coord : nearbyCoords )
         {
-            result = verifyMove(new Move(x, y, coord.getX(), coord.getY()));
-            if( result != null )
+            result = verifyMove(new Move(x, y, coord.getX(), coord.getY()), additionalVerifyConditions);
+            if( result != 0 )
                 possibleMoves.add( coord );
         }
 

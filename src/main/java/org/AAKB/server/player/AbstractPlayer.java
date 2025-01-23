@@ -8,7 +8,7 @@ public abstract class AbstractPlayer {
 
     private PlayerColor color;
 
-    private boolean finished;
+    private boolean winner;
 
     AbstractPlayer() {}
 
@@ -31,14 +31,14 @@ public abstract class AbstractPlayer {
         this.color = color;
     }
 
-    public void setFinished(boolean status)
+    public void setWinner(boolean status)
     {
-        this.finished = status;
+        this.winner = status;
     }
 
-    public boolean isFinished()
+    public boolean isWinner()
     {
-        return finished;
+        return winner;
     }
 
     public int getId(){

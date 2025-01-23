@@ -5,7 +5,7 @@ import java.net.*;
 
 import static org.AAKB.constants.ConstantProperties.*;
 
-public class Client {
+public class ClientStary {
     public static void main(String[] args) {
         try (Socket socket = new Socket(SERVER_ADDRESS, SERVER_PORT);
              PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
