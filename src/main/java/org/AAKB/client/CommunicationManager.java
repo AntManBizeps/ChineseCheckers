@@ -1,5 +1,8 @@
 package org.AAKB.client;
 
+import static org.AAKB.constants.ConstantProperties.SERVER_ADDRESS;
+import static org.AAKB.constants.ConstantProperties.SERVER_PORT;
+
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
@@ -20,9 +23,9 @@ class CommunicationManager {
      * @param port the port number on which the server is listening.
      * @throws Exception if the connection cannot be established.
      */
-    CommunicationManager(String host, int port) throws Exception {
+    CommunicationManager() throws Exception {
         try {
-            socket = new Socket(host, port);
+            socket = new Socket(SERVER_ADDRESS, SERVER_PORT);
             output = new PrintWriter(socket.getOutputStream(), true);
             input = new BufferedReader(new InputStreamReader(socket.getInputStream()));
         } catch (Exception e) {
