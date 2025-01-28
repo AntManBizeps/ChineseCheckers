@@ -45,7 +45,7 @@ public class CommandBuilder {
     /**
      * zwraca utworzoną komendę
      */
-    String getCommand()
+    public String getCommand()
     {
         return command.toString();
     }

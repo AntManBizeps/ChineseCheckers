@@ -6,9 +6,11 @@ public class Move {
     private int toX;
     private int toY;
 
-    public Move(int fromX, int toX, int fromY, int toY) {
+    public Move(int fromX, int fromY, int toX, int toY) {
         this.fromX = fromX;
         this.toX = toX;
+        this.fromY = fromY;
+        this.toY = toY;
     }
 
     public int getFromX() {
