@@ -71,7 +71,7 @@ public class Game {
                 .findFirst()
                 .orElse(null);
         if(foundPlayer != null) {
-            foundPlayer.sendCommand("GAME: Your turn Player " + currentPlayerTurn.get() + ".");
+            foundPlayer.sendCommand("GAME Your turn Player " + currentPlayerTurn.get());
         } else {
             nextTurn();
         }
@@ -86,6 +86,7 @@ public class Game {
     public Move processMove(String input){
         Move move = InputInterpeter.getMoveFromString(input);
         if(move == null){
+            System.out.println("kupa");
             return null;
         }
         int outcome = gameMaster.verifyMove(move, conditions);

@@ -4,7 +4,6 @@ import org.AAKB.constants.PlayerColor;
 
 import javafx.scene.paint.*;
 import javafx.scene.shape.Circle;
-import javafx.scene.shape.StrokeType;
 
 public class Field {
     private int x;                                  // Współrzędna X pola (kolumna)
@@ -12,113 +11,70 @@ public class Field {
     private Circle circle;                          // Referencja do odpowiadającego Circle w GUI
     private PlayerColor color = PlayerColor.NONE;   // Kolor pionka na danym polu
 
-    public Field( int x, int y, Circle circle )
-    {
+    public Field(int x, int y, Circle circle) {
         this.x = x;
         this.y = y;
         this.circle = circle;
     }
 
-    public int getX()
-    {
+    // Getter współrzędnych
+    public int getX() {
         return this.x;
     }
 
-    public int getY()
-    {
+    public int getY() {
         return this.y;
     }
 
-    void setColor( PlayerColor color )
-    {
-        this.color = color;
-        Stop[] gradientPhases = getProperGradient( color );
-        setGradient( gradientPhases );
-    }
-
-    private Stop[] getProperGradient( PlayerColor color )
-    {
-        Stop[] stops = { new Stop(0, Color.WHITE), null };
-
-        switch( color )
-        {
-            case NONE:
-                this.color = PlayerColor.NONE;
-                stops[ 1 ] = new Stop( 1, Color.WHITE );
-                break;
-            case RED:
-                stops[ 1 ] = new Stop( 1, Color.RED );
-                break;
-            case GREEN:
-                stops[ 1 ] = new Stop( 1, Color.GREEN );
-                break;
-            case YELLOW:
-                stops[ 1 ] = new Stop( 1, Color.YELLOW );
-                break;
-            case BLUE:
-                stops[ 1 ] = new Stop( 1, Color.BLUE );
-                break;
-            case ORANGE:
-                stops[ 1 ] = new Stop( 1, Color.ORANGE );
-                break;
-            case VIOLET:
-                stops[ 1 ] = new Stop( 1, Color.VIOLET );
-                break;
-            default:
-                throw new RuntimeException( "Podany kolor nie istnieje: '" + color + "'" );
-        }
-        return stops;
-    }
-
-    private void setGradient( Stop[] gradientStops )
-    {
-        RadialGradient gradient = new RadialGradient( 0, 0,
-                0.5, 0.5, 0.5, true, CycleMethod.NO_CYCLE, gradientStops );
-
-        circle.setFill( gradient );
-    }
-
-    public PlayerColor getColor()
-    {
+    // Getter i setter koloru pionka
+    public PlayerColor getColor() {
         return color;
     }
 
-    void setSelected( boolean state )
-    {
-        StrokeType strokeType;
-        if( !circle.isDisabled() )
-        {
-            if( state )
-                strokeType = StrokeType.OUTSIDE; // lekko powiększa kółko
-            else
-                strokeType = StrokeType.INSIDE;
-
-            circle.setStrokeType( strokeType );
-        }
-
+    public void setColor(PlayerColor color) {
+        this.color = color;
+        updateCircleColor(color);
     }
 
-    public boolean circleEquals( Circle circle )
-    {
+    // Aktualizacja koloru pola (dla pionka lub pustego pola)
+    private void updateCircleColor(PlayerColor color) {
+        Stop[] stops = {new Stop(0, Color.WHITE), new Stop(1, (Color) getColorAsPaint(color))};
+        RadialGradient gradient = new RadialGradient(
+            0, 0, 0.5, 0.5, 0.5, true, CycleMethod.NO_CYCLE, stops
+        );
+        circle.setFill(gradient);
+    }
+
+    // Konwersja koloru PlayerColor na Paint
+    private Paint getColorAsPaint(PlayerColor color) {
+        switch (color) {
+            case NONE: return Color.WHITE;
+            case RED: return Color.RED;
+            case GREEN: return Color.GREEN;
+            case YELLOW: return Color.YELLOW;
+            case BLUE: return Color.BLUE;
+            case ORANGE: return Color.ORANGE;
+            case VIOLET: return Color.VIOLET;
+            default: throw new RuntimeException("Nieznany kolor: " + color);
+        }
+    }
+
+    // Metoda podświetlająca pole
+    public void highlightField(boolean highlight) {
+        if (highlight) {
+            circle.setStroke(Color.YELLOW); // Ustawienie żółtej obwódki
+            circle.setStrokeWidth(3);      // Grubość obwódki
+        } else {
+            circle.setStroke(null);        // Usunięcie obwódki
+        }
+    }
+
+    public boolean hasPiece() {
+        return color != PlayerColor.NONE; // Jeśli kolor nie jest NONE, pole jest zajęte
+    }
+
+    // Porównanie Circle
+    public boolean circleEquals(Circle circle) {
         return this.circle == circle;
-    }
-
-    void markAsPossibleJumpTarget( boolean state )
-    {
-        if( !circle.isDisabled() && color == PlayerColor.NONE )
-        {
-            Paint fillColor;
-            if( state )
-                fillColor = Paint.valueOf( "#47F2FF" );
-            else
-                fillColor = Color.WHITE;
-
-            circle.setFill( fillColor );
-        }
-    }
-
-    boolean isDisabled()
-    {
-        return circle.isDisabled();
     }
 }

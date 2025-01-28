@@ -24,7 +24,7 @@ public class Rookie{
     public int askForNumberOfPlayers() {
         if(id.get() == 1){
             while(true){
-                communicationManager.writeLine("CHOOSE Choose number of players (2, 3, 4, 6): ");
+                communicationManager.writeLine("CHOOSE Choose number of players");
                 int input = 0;
                 try {
                     input = Integer.parseInt(communicationManager.readLine());

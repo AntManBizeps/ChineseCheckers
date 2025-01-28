@@ -48,8 +48,10 @@ public class Lobby {
         Rookie rookie = new Rookie(serverSocket.accept(), currentPlayers.incrementAndGet());
         synchronized (rookieList) {
             rookieList.add(rookie);
+            System.out.println("added client");
             int numberOfPlayers = rookie.askForNumberOfPlayers();
             if(numberOfPlayers != -1) {
+                System.out.println(numberOfPlayers);
                 totalPlayers.addAndGet(numberOfPlayers);
                 broadcast("LOBBY Game for "+ totalPlayers.get() + " player(s) has been chosen.");
             }
