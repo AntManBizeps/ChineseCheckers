@@ -21,21 +21,23 @@ public class Rookie{
         }
     }
 
-    public int askForNumberOfPlayers() {
+    public String askForNumberOfPlayers() {
         if(id.get() == 1){
             while(true){
-                communicationManager.writeLine("CHOOSE Choose number of players");
-                int input = 0;
+                communicationManager.writeLine("CHOOSE Choose number of real players and bots");
+                int inputRealPlayers = 0;
+                int inputBots = 0;
                 try {
-                    input = Integer.parseInt(communicationManager.readLine());
+                    inputRealPlayers = Integer.parseInt(communicationManager.readLine());
+                    inputBots = Integer.parseInt(communicationManager.readLine());
                 } catch (Exception e) {
                     throw new RuntimeException(e);
                 }
-                if(Lobby.validateNumberOfPlayers(input)){
-                    return input;
+                if(Lobby.validateNumberOfPlayers(inputRealPlayers+inputBots)){
+                    return (inputRealPlayers+","+inputBots);
                 }
             }
-        } else return -1;
+        } else return "";
 
     }
 

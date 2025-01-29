@@ -16,6 +16,10 @@ public class Lobby {
 
     private final AtomicInteger currentPlayers = new AtomicInteger(0);
 
+    private final AtomicInteger realPlayers = new AtomicInteger(0);
+
+    private final AtomicInteger botPlayers = new AtomicInteger(0);
+
     private final ServerSocket serverSocket;
 
     public Lobby(ServerSocket serverSocket) {
@@ -24,10 +28,10 @@ public class Lobby {
 
     public void run(){
         try {
-            while((totalPlayers.get() == 0 && currentPlayers.get() <6) || (totalPlayers.get() != 0 && currentPlayers.get() < totalPlayers.get())) {
+            while((totalPlayers.get() == 0 && currentPlayers.get() <6) || (totalPlayers.get() != 0 && currentPlayers.get() < realPlayers.get())) {
                 addRookie();
-                if(totalPlayers.get() != 0 & currentPlayers.get() != totalPlayers.get()) {
-                    broadcast("LOBBY Waiting for " + (totalPlayers.get() - currentPlayers.get()) + " player(s) to jon...");
+                if(totalPlayers.get() != 0 & currentPlayers.get() != realPlayers.get()) {
+                    broadcast("LOBBY Waiting for " + (realPlayers.get() - currentPlayers.get()) + " player(s) to jon...");
                 }
             }
             broadcast("LOBBY All players have been join, preparing the game...");
@@ -40,7 +44,7 @@ public class Lobby {
     }
 
     private void createNewGame(ArrayList<Rookie> rookieList) throws Exception {
-        new Game(rookieList, totalPlayers.get());
+        new Game(rookieList, botPlayers.get());
     }
 
 
@@ -49,10 +53,14 @@ public class Lobby {
         synchronized (rookieList) {
             rookieList.add(rookie);
             System.out.println("added client");
-            int numberOfPlayers = rookie.askForNumberOfPlayers();
-            if(numberOfPlayers != -1) {
+            String numberOfPlayers = rookie.askForNumberOfPlayers();
+            if(!numberOfPlayers.isEmpty()) {
+                int numberOfRealPlayers = Integer.parseInt(numberOfPlayers.substring(0,1));
+                int numberOfBots = Integer.parseInt(numberOfPlayers.substring(2,3));
                 System.out.println(numberOfPlayers);
-                totalPlayers.addAndGet(numberOfPlayers);
+                totalPlayers.addAndGet(numberOfRealPlayers+numberOfBots);
+                botPlayers.addAndGet(numberOfBots);
+                realPlayers.addAndGet(numberOfRealPlayers);
                 broadcast("LOBBY Game for "+ totalPlayers.get() + " player(s) has been chosen.");
             }
             if(totalPlayers.get() != 0 & rookie.getId() != 1) {

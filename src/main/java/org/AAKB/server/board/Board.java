@@ -63,6 +63,56 @@ public abstract class Board {
         }
     }
 
+    public PlayerColor getTargetColor(int x, int y) throws UnplayableFieldException
+    {
+        if (fields[x][y].isPlayable())
+        {
+            return fields[x][y].getTargetColor();
+        } else
+        {
+            throw new UnplayableFieldException();
+        }
+    }
+
+    public PlayerColor getNativeColor(int x, int y) throws UnplayableFieldException
+    {
+        if (fields[x][y].isPlayable())
+        {
+            return fields[x][y].getNativeColor();
+        } else
+        {
+            throw new UnplayableFieldException();
+        }
+    }
+
+    public List<Coordinates> getCoordinatesByCurrentColor(PlayerColor color) {
+        List<Coordinates> coordinatesList = new ArrayList<>();
+
+        for (int x = 1; x < fields.length; x++) {
+            for (int y = 1; y < fields[x].length; y++) {
+                if (fields[x][y] != null && fields[x][y].getCurrentColor() == color) {
+                    coordinatesList.add(new Coordinates(x, y));
+                }
+            }
+        }
+
+        return coordinatesList;
+    }
+
+    public List<Coordinates> getCoordinatesByTargetColor(PlayerColor color) {
+        List<Coordinates> coordinatesList = new ArrayList<>();
+
+        for (int x = 0; x < fields.length; x++) {
+            for (int y = 0; y < fields[x].length; y++) {
+                if (fields[x][y] != null && fields[x][y].getTargetColor() == color) {
+                    coordinatesList.add(new Coordinates(x, y));
+                }
+            }
+        }
+
+        return coordinatesList;
+    }
+
     public Field getField(int x, int y)
     {
         if (x < 1 || y < 1 || x > columns || y > rows)

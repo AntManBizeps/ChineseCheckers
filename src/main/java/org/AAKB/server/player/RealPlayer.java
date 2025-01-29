@@ -1,6 +1,7 @@
 package org.AAKB.server.player;
 
 import org.AAKB.constants.PlayerColor;
+import org.AAKB.server.InputInterpeter;
 import org.AAKB.server.board.Move;
 import org.AAKB.server.main.Game;
 
@@ -31,7 +32,8 @@ public class RealPlayer extends AbstractPlayer implements Runnable {
                     communicationManager.writeLine("GAME You skipped your turn.");
                     game.nextTurn();
                 } else if(game.getCurrentPlayerTurn() == getId() && input.startsWith("MOVE")){
-                    Move move = game.processMove(input);
+                    Move move = game.processMove(InputInterpeter.getMoveFromString(input));
+                    game.getGameMaster().isWinner(getColor());
                     if(move == null){
                         communicationManager.writeLine("FALSE Invalid move. Try again.");
                     } else {
