@@ -48,15 +48,9 @@
       <menus>
         <Menu mnemonicParsing="false" text="Game">
           <items>
-            <MenuItem mnemonicParsing="false" text="Join Game" />
-            <Menu mnemonicParsing="false" text="Create Game">
-              <items>
-                <MenuItem fx:id="players2Option" mnemonicParsing="false" text="2 Players" />
-                <MenuItem fx:id="players3Option" mnemonicParsing="false" text="3 Players" />
-                <MenuItem fx:id="players4Option" mnemonicParsing="false" text="4 Players" />
-                <MenuItem fx:id="players6Option" mnemonicParsing="false" text="6 Players" />
-              </items>
-            </Menu>
+            <MenuItem fx:id="skipOption" mnemonicParsing="false" text="Skip" />
+            <MenuItem fx:id="undoOption" mnemonicParsing="false" text="Undo" />
+            <MenuItem fx:id="redoOption" mnemonicParsing="false" text="Redo" />
             <MenuItem fx:id="quitOption" mnemonicParsing="false" text="Quit" />
           </items>
         </Menu>
@@ -69,7 +63,7 @@
     </MenuBar>
 
     <!-- Info Bar -->
-    <Label fx:id="infoBar" prefHeight="30.0" style="-fx-background-color: orange; -fx-text-fill: white; -fx-alignment: center;" text="Select the number of players to start." />
+    <Label fx:id="infoBar" text="Select the number of players to start." />
 
     <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="478.0" prefWidth="640.0" VBox.vgrow="ALWAYS">
       <children>

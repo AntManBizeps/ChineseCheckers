@@ -12,37 +12,26 @@ public class Controller {
     @FXML
     private Label infoBar;
     @FXML
-    private MenuItem players2Option;
+    private MenuItem undoOption;
     @FXML
-    private MenuItem players3Option;
-    @FXML
-    private MenuItem players4Option;
-    @FXML
-    private MenuItem players6Option;
+    private MenuItem redoOption;
     @FXML
     private MenuItem quitOption;
     @FXML
     private MenuItem aboutOption;
-    
-    
+    @FXML
+    private MenuItem skipOption;
+
     public Pane getBoardPane() {
         return boardPane;
     }
 
-    public MenuItem getPlayers2Option() {
-        return players2Option;
+    public MenuItem getUndoOption() {
+        return undoOption;
     }
 
-    public MenuItem getPlayers3Option() {
-        return players3Option;
-    }
-    
-    public MenuItem getPlayers4Option() {
-        return players4Option;
-    }
-
-    public MenuItem getPlayers6Option() {
-        return players6Option;
+    public MenuItem getRedoOption() {
+        return redoOption;
     }
   
     public MenuItem getQuitOption() {
@@ -53,5 +42,11 @@ public class Controller {
         return aboutOption;
     }
     
-    
+    public MenuItem getSkipOption() {
+        return skipOption;
+    }
+
+    public Label getInfoBar() {
+        return infoBar;
+    }
 }

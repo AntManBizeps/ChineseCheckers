@@ -11,16 +11,26 @@ import org.AAKB.constants.ResponseInterpreter;
 
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
+import javafx.geometry.Insets;
 import javafx.scene.Node;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
+import javafx.scene.control.RadioButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 import javafx.scene.shape.Circle;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 
 public class GameManager {
     Client client;
     Controller controller;
     Pane boardPane;
+    Label infoBar;
     List<Field> fields = new ArrayList<>();
     Board board;
     private Field selectedPiece; // Przechowuje wybrany pionek
@@ -31,13 +41,13 @@ public class GameManager {
         this.client = client;
         this.controller = controller;
         boardPane = controller.getBoardPane();
+        infoBar = controller.getInfoBar();
 
         controller.getAboutOption().setOnAction(null);
         controller.getQuitOption().setOnAction(null);
-        controller.getPlayers2Option().setOnAction(this::on2PlayersOption);
-        controller.getPlayers3Option().setOnAction(this::on3PlayersOption);
-        controller.getPlayers4Option().setOnAction(this::on4PlayersOption);
-        controller.getPlayers6Option().setOnAction(this::on6PlayersOption);
+        controller.getUndoOption().setOnAction(this::onUndo);
+        controller.getRedoOption().setOnAction(this::onRedo);
+        controller.getSkipOption().setOnAction(this::onSkip);
     }
 
     public void handleServerMessage(String serverMessage) {
@@ -47,6 +57,9 @@ public class GameManager {
             switch (response.getCode()) {
                 case "LOBBY":
                     handleLobbyMessage(response);
+                    break;
+                case "CHOOSE":
+                    handleChooseMessage();
                     break;
                 case "GAME":
                     handleGameMessage(response);
@@ -71,12 +84,10 @@ public class GameManager {
             message.append(word).append(" ");
         }
         String finalMessage = message.toString().trim();
+    
+        // Użyj Platform.runLater, aby zaktualizować UI na wątku JavaFX
         Platform.runLater(() -> {
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Lobby");
-            alert.setHeaderText("Informacja od serwera");
-            alert.setContentText(finalMessage);
-            alert.showAndWait();
+            controller.getInfoBar().setText(finalMessage); // Ustaw tekst w infoBar
         });
     }
 
@@ -97,13 +108,13 @@ public class GameManager {
             }
         }
 
-        Platform.runLater(() -> {
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Gra");
-            alert.setHeaderText("Informacje o grze");
-            alert.setContentText(finalMessage);
-            alert.showAndWait();
-        });
+        // Platform.runLater(() -> {
+        //     Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        //     alert.setTitle("Gra");
+        //     alert.setHeaderText("Informacje o grze");
+        //     alert.setContentText(finalMessage);
+        //     alert.showAndWait();
+        // });
 
         System.out.println("GAME: " + finalMessage);
     }
@@ -191,21 +202,18 @@ public class GameManager {
         return null;
     }
 
-    private void on2PlayersOption(ActionEvent event) {
-        client.send("2");
+    private void onUndo(ActionEvent event) {
+
     }
 
-    private void on3PlayersOption(ActionEvent event) {
-        client.send("3");
+    private void onRedo(ActionEvent event) {
+
     }
 
-    private void on4PlayersOption(ActionEvent event) {
-        client.send("4");
+    private void onSkip(ActionEvent event) {
+        client.send("SKIP");
     }
 
-    private void on6PlayersOption(ActionEvent event) {
-        client.send("6");
-    }
 
     private void sendMoveToServer() {
         if (selectedPiece != null && targetField != null) {
@@ -220,4 +228,68 @@ public class GameManager {
             System.err.println("Błąd: Nie można wysłać ruchu, ponieważ brakuje danych.");
         }
     }
+
+    private void handleChooseMessage() {
+        Platform.runLater(() -> {
+            Stage popupStage = new Stage();
+            popupStage.initModality(Modality.APPLICATION_MODAL);
+            popupStage.setTitle("Settings");
+    
+            // Dropdown for number of players
+            ComboBox<Integer> playersDropdown = new ComboBox<>();
+            playersDropdown.getItems().addAll(2, 3, 4, 6);
+            playersDropdown.setPromptText("Select number of players");
+    
+            // Dropdown for number of bots
+            ComboBox<Integer> botsDropdown = new ComboBox<>();
+            botsDropdown.setPromptText("Select number of bots");
+            botsDropdown.setDisable(true);
+    
+            // RadioButton for load game
+            RadioButton loadGameRadio = new RadioButton("Load Game");
+            loadGameRadio.setOnAction(e -> {
+                boolean selected = loadGameRadio.isSelected();
+                playersDropdown.setDisable(selected);
+                botsDropdown.setDisable(selected);
+            });
+    
+            // Submit button
+            Button submitButton = new Button("Submit");
+            submitButton.setOnAction(e -> {
+                if (loadGameRadio.isSelected()) {
+                    client.send("LOAD");
+                } else {
+                    int players = playersDropdown.getValue();
+                    int bots;
+                    if (botsDropdown.getValue() != null) {
+                        bots = botsDropdown.getValue();
+                    } else {
+                        bots = 0;
+                    }
+                    // String command = String.format("START %d %d", players, bots);
+                    // client.send(command);
+                    System.out.println("Players: " + players + ", Bots: " + bots);
+                }
+                popupStage.close();
+            });
+    
+            // Update bots dropdown based on players selection
+            playersDropdown.setOnAction(e -> {
+                int players = playersDropdown.getValue();
+                botsDropdown.getItems().clear();
+                for (int i = 1; i < players; i++) {
+                    botsDropdown.getItems().add(i);
+                }
+                botsDropdown.setDisable(false);
+            });
+    
+            VBox popupLayout = new VBox(10, playersDropdown, botsDropdown, loadGameRadio, submitButton);
+            popupLayout.setPadding(new Insets(20));
+    
+            Scene popupScene = new Scene(popupLayout, 300, 200);
+            popupStage.setScene(popupScene);
+            popupStage.showAndWait();
+        });
+    }
+
 }
