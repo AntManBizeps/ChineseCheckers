@@ -86,7 +86,6 @@ public class Game {
     public Move processMove(String input){
         Move move = InputInterpeter.getMoveFromString(input);
         if(move == null){
-            System.out.println("kupa");
             return null;
         }
         int outcome = gameMaster.verifyMove(move, conditions);
