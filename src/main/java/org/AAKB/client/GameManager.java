@@ -22,6 +22,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.RadioButton;
+import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
@@ -52,6 +53,7 @@ public class GameManager {
         controller.getUndoOption().setOnAction(this::onUndo);
         controller.getRedoOption().setOnAction(this::onRedo);
         controller.getSkipOption().setOnAction(this::onSkip);
+        controller.getSaveOption().setOnAction(this::showSaveGamePopup);
     }
 
     public void handleServerMessage(String serverMessage) {
@@ -265,12 +267,60 @@ public class GameManager {
         return null;
     }
 
-    private void onUndo(ActionEvent event) {
+    public void showSaveGamePopup(ActionEvent event) {
+        Platform.runLater(() -> {
+            Stage stage = new Stage();
+            stage.setTitle("Zapisz grę");
 
+            Label label = new Label("Podaj nazwę gry:");
+            TextField textField = new TextField();
+            textField.setPromptText("Nazwa gry (jedno słowo)");
+
+            Button saveButton = new Button("Save");
+            saveButton.setDisable(true); // Domyślnie wyłączony
+
+            // Walidacja: Umożliwia zapis tylko, jeśli wpisano jedno słowo
+            textField.textProperty().addListener((obs, oldVal, newVal) -> {
+                saveButton.setDisable(!newVal.matches("\\w+")); // Tylko jedno słowo
+            });
+
+            saveButton.setOnAction(e -> {
+                String gameName = textField.getText().trim();
+                if (!gameName.isEmpty() && gameName.matches("\\w+")) { // Sprawdzenie poprawności
+                    sendSaveGameToServer(gameName);
+                    stage.close();
+                }
+            });
+
+            VBox layout = new VBox(10, label, textField, saveButton);
+            layout.setStyle("-fx-padding: 10;");
+
+            Scene scene = new Scene(layout, 300, 150);
+            stage.setScene(scene);
+            stage.show();
+        });
+    }
+
+    /**
+     * Wysyła nazwę gry do serwera w formacie "SAVE game_name"
+     */
+    private void sendSaveGameToServer(String gameName) {
+        String message = "SAVE " + gameName;
+        client.send(message);
+        System.out.println("Wysłano do serwera: " + message);
+    }
+
+
+    private void onUndo(ActionEvent event) {
+        client.send("UNDO");
     }
 
     private void onRedo(ActionEvent event) {
+        client.send("REDO");
+    }
 
+    private void onSave(ActionEvent event) {
+        client.send("UNDO");
     }
 
     private void onSkip(ActionEvent event) {

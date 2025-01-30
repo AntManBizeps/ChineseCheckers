@@ -51,6 +51,7 @@
             <MenuItem fx:id="skipOption" mnemonicParsing="false" text="Skip" />
             <MenuItem fx:id="undoOption" mnemonicParsing="false" text="Undo" />
             <MenuItem fx:id="redoOption" mnemonicParsing="false" text="Redo" />
+            <MenuItem fx:id="saveOption" mnemonicParsing="false" text="Save" />
             <MenuItem fx:id="quitOption" mnemonicParsing="false" text="Quit" />
           </items>
         </Menu>

@@ -21,6 +21,12 @@ public class Controller {
     private MenuItem aboutOption;
     @FXML
     private MenuItem skipOption;
+    @FXML
+    private MenuItem saveOption;
+
+    public MenuItem getSaveOption() {
+        return saveOption;
+    }
 
     public Pane getBoardPane() {
         return boardPane;
