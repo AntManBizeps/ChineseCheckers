@@ -28,6 +28,11 @@ public class RealPlayer extends AbstractPlayer implements Runnable {
                 String input = communicationManager.readLine();
                 if (input == null) break;
 
+                if(input.startsWith("SAVE")) {
+                    String name = input.substring(5);
+                    game.saveGame(name);
+                }
+
                 if(game.getCurrentPlayerTurn() == getId() && input.startsWith("SKIP")){
                     communicationManager.writeLine("GAME You skipped your turn.");
                     game.nextTurn();
@@ -39,8 +44,6 @@ public class RealPlayer extends AbstractPlayer implements Runnable {
                     } else {
                         communicationManager.writeLine("GAME Moved.");
                     }
-                } else if(input.startsWith("SAVE")) {
-                    String name = input.substring(5);
                 } else if(game.getCurrentPlayerTurn() == getId()){
                     communicationManager.writeLine("FALSE Command not recognized. Try again.");
                 }
