@@ -266,8 +266,8 @@ public class GameManager {
                     } else {
                         bots = 0;
                     }
-                    // String command = String.format("START %d %d", players, bots);
-                    // client.send(command);
+                    String command = String.format("START %d,%d", players, bots);
+                    client.send(command);
                     System.out.println("Players: " + players + ", Bots: " + bots);
                 }
                 popupStage.close();
