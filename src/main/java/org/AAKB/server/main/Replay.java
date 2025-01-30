@@ -113,8 +113,6 @@ public class Replay {
 
             JSONObject movesJson = jsonResponse.getJSONObject("moves");
 
-            System.out.println(movesJson.get("1"));
-
             Iterator<String> keys = movesJson.keys();
             while (keys.hasNext()) {
                 String key = keys.next();

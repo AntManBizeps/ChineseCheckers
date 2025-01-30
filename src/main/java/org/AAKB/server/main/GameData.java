@@ -12,8 +12,8 @@ public class GameData {
         public GameData(String game_name, int num_of_players, Map<Integer, String> moves) {
             this.game_name = game_name;
             this.num_of_players = num_of_players;
-            int num_of_moves = moves.size();
             this.moves = moves;
+            int num_of_moves = moves.size();
         }
 
         public String getGame_name() { return game_name; }

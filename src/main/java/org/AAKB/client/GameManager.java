@@ -93,7 +93,7 @@ public class GameManager {
             message.append(word).append(" ");
         }
         String finalMessage = message.toString().trim();
-    
+        createBoard();
         // Użyj Platform.runLater, aby zaktualizować UI na wątku JavaFX
         Platform.runLater(() -> {
             controller.getInfoBar().setText(finalMessage); // Ustaw tekst w infoBar
