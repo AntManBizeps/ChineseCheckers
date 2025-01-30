@@ -37,17 +37,17 @@ public class Rookie implements Runnable {
 
     @Override
     public void run() {
-        int counter = 0;
-        communicationManager.writeLine(boardStates.get(counter));
+        int counter = 1;
+        communicationManager.writeLine(boardStates.get(1));
         while(counter < boardStates.size()) {
             try {
                 String input = communicationManager.readLine();
                 if (input == null) break;
-                if(input.startsWith("NEXT")) {
+                if(input.startsWith("REDO")) {
                     counter++;
                     communicationManager.writeLine(boardStates.get(counter));
                 } else if(input.startsWith("UNDO")) {
-                    if (counter < 1) {
+                    if (counter < 2) {
                         continue;
                     }
                     counter--;

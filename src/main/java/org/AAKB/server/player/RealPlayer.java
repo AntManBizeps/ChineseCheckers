@@ -39,10 +39,10 @@ public class RealPlayer extends AbstractPlayer implements Runnable {
                     } else {
                         communicationManager.writeLine("GAME Moved.");
                     }
+                } else if(input.startsWith("SAVE")) {
+                    String name = input.substring(5);
                 } else if(game.getCurrentPlayerTurn() == getId()){
                     communicationManager.writeLine("FALSE Command not recognized. Try again.");
-                } else if(input.startsWith("SAVE")){
-                    String name = input.substring(5);
                 }
                 else {
                     communicationManager.writeLine("FALSE Not your turn. Please wait...");
