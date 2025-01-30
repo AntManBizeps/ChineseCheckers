@@ -13,6 +13,10 @@ public class Move {
         this.toY = toY;
     }
 
+    public Move getReverseMove(){
+        return new Move(toX, toY, fromX, fromY);
+    }
+
     public int getFromX() {
         return fromX;
     }

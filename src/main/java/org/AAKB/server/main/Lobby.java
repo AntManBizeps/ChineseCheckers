@@ -28,14 +28,19 @@ public class Lobby {
 
     public void run(){
         try {
-            while((totalPlayers.get() == 0 && currentPlayers.get() <6) || (totalPlayers.get() != 0 && currentPlayers.get() < realPlayers.get())) {
+            while((totalPlayers.get() == 0 && currentPlayers.get() <6) || (totalPlayers.get() != 0 && currentPlayers.get() < realPlayers.get()) || totalPlayers.get() > 7) {
                 addRookie();
                 if(totalPlayers.get() != 0 & currentPlayers.get() != realPlayers.get()) {
                     broadcast("LOBBY Waiting for " + (realPlayers.get() - currentPlayers.get()) + " player(s) to jon...");
                 }
             }
-            broadcast("LOBBY All players have been join, preparing the game...");
-            createNewGame(rookieList);
+            if(totalPlayers.get() > 0 && totalPlayers.get() < 7) {
+                broadcast("LOBBY All players have been join, preparing the game...");
+                createNewGame(rookieList);
+            } else if(totalPlayers.get() > 7) {
+                new Replay(rookieList);
+            }
+
 
         } catch (Exception e) {
             broadcast("LOBBY Error: " + e.getMessage());

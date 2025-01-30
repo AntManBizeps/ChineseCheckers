@@ -1,17 +1,27 @@
 package org.AAKB.server.player;
 
+import org.AAKB.server.board.ClassicBoardFactory;
+import org.AAKB.server.board.Move;
 import org.AAKB.server.main.Lobby;
+import org.AAKB.server.movement.ClassicMovementStrategy;
+import org.AAKB.server.movement.GameMaster;
 
 import java.net.Socket;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
 
-public class Rookie{
+public class Rookie implements Runnable {
 
     private AtomicInteger id;
 
+    Map<Integer, String> boardStates = new HashMap<Integer, String>();
+
     private final CommunicationManager communicationManager;
 
-    public Rookie(Socket socket, Integer id) throws Exception {
+    public Rookie(Socket socket, Integer id) throws Exception  {
         this.id = new AtomicInteger(id);
         try{
             this.communicationManager = new CommunicationManager(socket);
@@ -21,20 +31,59 @@ public class Rookie{
         }
     }
 
+    public void setBoardStates(Map<Integer, String> boardStates) {
+        this.boardStates = boardStates;
+    }
+
+    @Override
+    public void run() {
+        int counter = 0;
+        communicationManager.writeLine(boardStates.get(counter));
+        while(counter < boardStates.size()) {
+            try {
+                String input = communicationManager.readLine();
+                if (input == null) break;
+                if(input.startsWith("NEXT")) {
+                    counter++;
+                    communicationManager.writeLine(boardStates.get(counter));
+                } else if(input.startsWith("UNDO")) {
+                    if (counter < 1) {
+                        continue;
+                    }
+                    counter--;
+                    communicationManager.writeLine(boardStates.get(counter));
+                }
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+
+        }
+        communicationManager.writeLine("GAME OVER ");
+
+
+    }
+
     public String askForNumberOfPlayers() {
         if(id.get() == 1){
             while(true){
                 communicationManager.writeLine("CHOOSE Choose number of real players and bots");
-                int inputRealPlayers = 0;
+                int inputPlayers = 0;
                 int inputBots = 0;
                 try {
-                    inputRealPlayers = Integer.parseInt(communicationManager.readLine());
-                    inputBots = Integer.parseInt(communicationManager.readLine());
+                    String input = communicationManager.readLine();
+                    if(input.startsWith("START")){
+                        inputPlayers = Integer.parseInt(input.substring(6,7));
+                        inputBots = Integer.parseInt(input.substring(8,9));
+                    }
+                    if(input.startsWith("LOAD")){
+                        return "9,9";
+                    }
+
                 } catch (Exception e) {
                     throw new RuntimeException(e);
                 }
-                if(Lobby.validateNumberOfPlayers(inputRealPlayers+inputBots)){
-                    return (inputRealPlayers+","+inputBots);
+                if(Lobby.validateNumberOfPlayers(inputPlayers)){
+                    return ((inputPlayers-inputBots)+","+inputBots);
                 }
             }
         } else return "";
@@ -52,5 +101,7 @@ public class Rookie{
     public CommunicationManager getCommunicationManager() {
         return communicationManager;
     }
+
+
 
 }
