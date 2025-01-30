@@ -76,8 +76,8 @@ public class Replay {
 
                 for (int i = 0; i < gamesArray.length(); i++) {
                     JSONObject game = gamesArray.getJSONObject(i);
-                    int gameId = game.getInt("gameId");
-                    String gameName = game.getString("gameName");
+                    int gameId = game.getInt("game_id");
+                    String gameName = game.getString("game_name");
                     gameNames.put(gameId, gameName);
                 }
             } else {

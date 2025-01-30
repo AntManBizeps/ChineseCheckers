@@ -76,7 +76,7 @@ public class Rookie implements Runnable {
                         inputBots = Integer.parseInt(input.substring(8,9));
                     }
                     if(input.startsWith("LOAD")){
-                        return "9,9";
+                        return "LOAD";
                     }
 
                 } catch (Exception e) {

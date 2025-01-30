@@ -1,7 +1,9 @@
 package org.AAKB.client;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.AAKB.client.board.Board;
 import org.AAKB.client.board.Field;
@@ -18,6 +20,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
 import javafx.scene.control.RadioButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
@@ -32,6 +35,7 @@ public class GameManager {
     Pane boardPane;
     Label infoBar;
     List<Field> fields = new ArrayList<>();
+    private Map<String, Integer> gameList = new HashMap<>();
     Board board;
     private Field selectedPiece; // Przechowuje wybrany pionek
     private Field targetField; // Przechowuje pole docelowe
@@ -60,6 +64,9 @@ public class GameManager {
                     break;
                 case "CHOOSE":
                     handleChooseMessage();
+                    break;
+                case "DB":
+                    handleDatabaseMessage(response);
                     break;
                 case "GAME":
                     handleGameMessage(response);
@@ -176,10 +183,9 @@ public class GameManager {
 
     private void onFieldClick(Field field) {
         if (selectedPiece == null) {
-            // Sprawdzamy, czy pole zawiera pionek gracza
             if (board.getColor(field.getX(), field.getY()) == currentPlayerColor) {
                 selectedPiece = field;
-                field.highlightField(true); // Podświetlenie wybranego pionka
+                selectedPiece.highlightField(true); // Podświetlenie wybranego pionka
                 System.out.println("Wybrano pionek na polu: " + field.getX() + ", " + field.getY());
             } else {
                 System.out.println("Nie możesz wybrać tego pola. To nie Twój pionek!");
@@ -188,11 +194,68 @@ public class GameManager {
             targetField = field;
             System.out.println("Wybrano pole docelowe: " + field.getX() + ", " + field.getY());
             sendMoveToServer();
-            selectedPiece.highlightField(false); // Wyłącz podświetlenie pionka
+    
+            // Resetowanie podświetlenia po ruchu
+            selectedPiece.highlightField(false);
             selectedPiece = null;
             targetField = null;
         }
     }
+
+    private void handleDatabaseMessage(Response response) {
+        gameList.clear(); // Czyszczenie starej listy gier
+
+        int[] numbers = response.getNumbers();
+        String[] words = response.getWords();
+
+        // Mapowanie game_id -> game_name
+        for (int i = 0; i < numbers.length; i++) {
+            gameList.put(words[i], numbers[i]); // game_name -> game_id
+            System.out.println("Dodano grę: ID=" + numbers[i] + ", Name=" + words[i]);
+        }
+
+        // Wyświetlenie listy gier w GUI
+        Platform.runLater(this::showGameSelectionPopup);
+    }
+
+    private void showGameSelectionPopup() {
+        Stage stage = new Stage();
+        stage.setTitle("Wybierz grę");
+    
+        ListView<String> listView = new ListView<>();
+        listView.getItems().addAll(gameList.keySet()); // Dodanie nazw gier
+    
+        Button submitButton = new Button("Submit");
+        submitButton.setDisable(true); // Domyślnie wyłączony
+    
+        listView.getSelectionModel().selectedItemProperty().addListener((obs, oldVal, newVal) -> {
+            submitButton.setDisable(newVal == null); // Włącz przycisk tylko po wybraniu gry
+        });
+    
+        submitButton.setOnAction(e -> {
+            String selectedGame = listView.getSelectionModel().getSelectedItem();
+            if (selectedGame != null) {
+                int gameId = gameList.get(selectedGame);
+                sendGameSelectionToServer(gameId);
+                stage.close();
+            }
+        });
+    
+        VBox layout = new VBox(10, listView, submitButton);
+        layout.setStyle("-fx-padding: 10;");
+    
+        Scene scene = new Scene(layout, 300, 400);
+        stage.setScene(scene);
+        stage.show();
+    }
+    
+
+    private void sendGameSelectionToServer(int gameId) {
+        String message = "DB " + gameId;
+        client.send(message);
+        System.out.println("Wysłano do serwera: " + message);
+    }
+
 
     private Field getFieldByCircleReference(Circle circle) {
         for (Field field : fields) {

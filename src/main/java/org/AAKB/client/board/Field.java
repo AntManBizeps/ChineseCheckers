@@ -1,51 +1,44 @@
 package org.AAKB.client.board;
 
 import org.AAKB.constants.PlayerColor;
-
 import javafx.scene.paint.*;
 import javafx.scene.shape.Circle;
 
 public class Field {
-    private int x;                                  // Współrzędna X pola (kolumna)
-    private int y;                                  // Współrzędna Y pola (wiersz)
-    private Circle circle;                          // Referencja do odpowiadającego Circle w GUI
-    private PlayerColor color = PlayerColor.NONE;   // Kolor pionka na danym polu
+    private int x;
+    private int y;
+    private Circle circle;
+    private PlayerColor color = PlayerColor.NONE;
+    private Paint previousStroke; // Przechowuje poprzedni kolor obramowania
 
     public Field(int x, int y, Circle circle) {
         this.x = x;
         this.y = y;
         this.circle = circle;
+        this.previousStroke = circle.getStroke(); // Zapamiętanie domyślnego bordera
     }
 
-    // Getter współrzędnych
-    public int getX() {
-        return this.x;
-    }
+    public int getX() { return this.x; }
 
-    public int getY() {
-        return this.y;
-    }
+    public int getY() { return this.y; }
 
-    // Getter i setter koloru pionka
-    public PlayerColor getColor() {
-        return color;
-    }
+    public PlayerColor getColor() { return color; }
 
     public void setColor(PlayerColor color) {
         this.color = color;
         updateCircleColor(color);
     }
 
-    // Aktualizacja koloru pola (dla pionka lub pustego pola)
+    public boolean hasPiece() {
+        return color != PlayerColor.NONE;
+    }
+
     private void updateCircleColor(PlayerColor color) {
         Stop[] stops = {new Stop(0, Color.WHITE), new Stop(1, (Color) getColorAsPaint(color))};
-        RadialGradient gradient = new RadialGradient(
-            0, 0, 0.5, 0.5, 0.5, true, CycleMethod.NO_CYCLE, stops
-        );
+        RadialGradient gradient = new RadialGradient(0, 0, 0.5, 0.5, 0.5, true, CycleMethod.NO_CYCLE, stops);
         circle.setFill(gradient);
     }
 
-    // Konwersja koloru PlayerColor na Paint
     private Paint getColorAsPaint(PlayerColor color) {
         switch (color) {
             case NONE: return Color.WHITE;
@@ -59,21 +52,17 @@ public class Field {
         }
     }
 
-    // Metoda podświetlająca pole
     public void highlightField(boolean highlight) {
         if (highlight) {
+            previousStroke = circle.getStroke(); // Zapisz poprzednie obramowanie
             circle.setStroke(Color.YELLOW); // Ustawienie żółtej obwódki
-            circle.setStrokeWidth(3);      // Grubość obwódki
+            // circle.setStrokeWidth(3);
         } else {
-            circle.setStroke(null);        // Usunięcie obwódki
+            circle.setStroke(previousStroke);
+             // Przywrócenie poprzedniego obramowania
         }
     }
 
-    public boolean hasPiece() {
-        return color != PlayerColor.NONE; // Jeśli kolor nie jest NONE, pole jest zajęte
-    }
-
-    // Porównanie Circle
     public boolean circleEquals(Circle circle) {
         return this.circle == circle;
     }

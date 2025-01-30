@@ -59,6 +59,12 @@ public class Lobby {
             rookieList.add(rookie);
             System.out.println("added client");
             String numberOfPlayers = rookie.askForNumberOfPlayers();
+
+            if (numberOfPlayers.equals("LOAD")) {
+                new Replay(rookieList);
+                return;
+            }
+
             if(!numberOfPlayers.isEmpty()) {
                 int numberOfRealPlayers = Integer.parseInt(numberOfPlayers.substring(0,1));
                 int numberOfBots = Integer.parseInt(numberOfPlayers.substring(2,3));
